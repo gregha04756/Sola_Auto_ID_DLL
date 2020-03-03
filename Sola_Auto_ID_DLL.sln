@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sola_Auto_ID_DLL", "Sola_Auto_ID_DLL\Sola_Auto_ID_DLL.vcxproj", "{0A264B8D-BE43-4831-A1E0-CEC54AE7F16B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Auto_Discovery_Test", "Auto_Discovery_Test\Auto_Discovery_Test.vcxproj", "{A150F7C2-00EB-4EF1-AAE1-28AE3F0E14FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0A264B8D-BE43-4831-A1E0-CEC54AE7F16B} = {0A264B8D-BE43-4831-A1E0-CEC54AE7F16B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A264B8D-BE43-4831-A1E0-CEC54AE7F16B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0A264B8D-BE43-4831-A1E0-CEC54AE7F16B}.Debug|Win32.Build.0 = Debug|Win32
+		{0A264B8D-BE43-4831-A1E0-CEC54AE7F16B}.Release|Win32.ActiveCfg = Release|Win32
+		{0A264B8D-BE43-4831-A1E0-CEC54AE7F16B}.Release|Win32.Build.0 = Release|Win32
+		{A150F7C2-00EB-4EF1-AAE1-28AE3F0E14FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A150F7C2-00EB-4EF1-AAE1-28AE3F0E14FC}.Debug|Win32.Build.0 = Debug|Win32
+		{A150F7C2-00EB-4EF1-AAE1-28AE3F0E14FC}.Release|Win32.ActiveCfg = Release|Win32
+		{A150F7C2-00EB-4EF1-AAE1-28AE3F0E14FC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
