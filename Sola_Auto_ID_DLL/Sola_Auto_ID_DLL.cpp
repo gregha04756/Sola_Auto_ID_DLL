@@ -27,8 +27,10 @@ CSola_Auto_ID_DLL::CSola_Auto_ID_DLL(uint8_t const la,
 	m_pwstr_IP = NULL;
 	m_p_lipddn = NULL;
 	m_pList_Addr_Solas = NULL;
+	m_p_to_owner = NULL;
 	m_st_ip_len = 0;
 	m_int_Port = 0;
+	m_dw_Work_Thread_ID = (DWORD)0;
 	try
 	{
 		m_pList_Addr_Solas = dynamic_cast<std::list<uint8_t>*>(new std::list<uint8_t>);
