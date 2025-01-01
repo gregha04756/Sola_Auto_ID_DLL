@@ -52,12 +52,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SOLA_AUTO_ID_DLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Report_Error_DLL\Report_Error_DLL;..\..\libmodbus-2.0.3\libmodbus-2.0.3_DLL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Report_Error_DLL\Report_Error_DLL;$(SolutionDir)..\libmodbus-2.0.3\libmodbus-2.0.3_DLL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(TargetDir);D:\Visual Studio Projects\Report_Error_DLL\Release;D:\Visual Studio Projects\libmodbus-2.0.3\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(TargetDir);$(SolutionDir)..\Report_Error_DLL\$(Configuration);$(SolutionDir)..\libmodbus-2.0.3\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libmodbus-2.0.3_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
