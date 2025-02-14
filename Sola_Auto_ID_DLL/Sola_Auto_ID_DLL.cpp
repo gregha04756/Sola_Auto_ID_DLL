@@ -613,17 +613,7 @@ INT_PTR CALLBACK Ctrash81_Modeless_Dlg_DLL::DlgProc(HWND hDlg,UINT message,WPARA
 	BOOL b_r;
 	static Ctrash81_Modeless_Dlg_DLL* pnd;
 	BOOL bResult;
-	int i;
 	int i_r;
-	int ndx;
-	UINT uiResult;
-	LRESULT lRes;
-	HRESULT hRes;
-	LARGE_INTEGER lipt;
-	DWORD hh;
-	int mm;
-	int ss;
-	double dErrRate;
 	static std::wstring *p_ip;
 	static HWND hwnd_mblo;
 	static HWND hwnd_mbhi;
@@ -791,7 +781,6 @@ HGLOBAL Ctrash81_Modeless_Dlg_DLL::Make_Dlg_Template(LPSTR lpszMessage)
     LPDLGITEMTEMPLATE lpdit;
     LPWORD lpw;
     LPWSTR lpwsz;
-    LRESULT ret;
     int nchar;
 
     hgbl = GlobalAlloc(GMEM_ZEROINIT, 1024);
@@ -925,7 +914,6 @@ void Ctrash81_Modeless_Dlg_DLL::Auto_ID_Scan_Upd_Callback(void *pto,std::wstring
 void Ctrash81_Modeless_Dlg_DLL::Auto_ID_Scan_Done_Callback(void *pto)
 {
 	Ctrash81_Modeless_Dlg_DLL *p_this;
-	BOOL b_r;
 	p_this = reinterpret_cast<Ctrash81_Modeless_Dlg_DLL*>(pto);
 	p_this->Scan_Done_Handler();
 }
