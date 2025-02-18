@@ -58,7 +58,6 @@ public:
 	inline uint8_t Get_High_Address(){return m_ui8_High_Range_MB_Addr;};
 	inline int Get_Server_Port(){return m_int_Port;};
 	HANDLE Start_Auto_Discovery(void);
-	inline std::list<uint8_t> *Get_Addr_List(){return m_pList_Addr_Solas;};
 	inline std::list<CSola_Auto_ID_DLL::SOLADEVICECOORDS> *Get_SDC_List(){return m_p_SDCL;};
 	inline func_ptr Get_Callback_Func_Ptr(){return m_pcf;};
 	inline void* Get_Pointer_To_Owner() { return m_p_to_owner; };
@@ -73,7 +72,6 @@ public:
 	// TODO: add your methods here.
 private:
 	size_t m_st_ip_len;
-	std::list<uint8_t> *m_pList_Addr_Solas;
 	std::string *m_pstr_IP;
 	std::wstring *m_pwstr_IP;
 	std::list<wstring> *m_p_lipddn;

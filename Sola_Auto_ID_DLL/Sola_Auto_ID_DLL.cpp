@@ -26,19 +26,10 @@ CSola_Auto_ID_DLL::CSola_Auto_ID_DLL(uint8_t const la,
 	m_pstr_IP = NULL;
 	m_pwstr_IP = NULL;
 	m_p_lipddn = NULL;
-	m_pList_Addr_Solas = NULL;
 	m_p_to_owner = NULL;
 	m_st_ip_len = 0;
 	m_int_Port = 0;
 	m_dw_Work_Thread_ID = (DWORD)0;
-	try
-	{
-		m_pList_Addr_Solas = dynamic_cast<std::list<uint8_t>*>(new std::list<uint8_t>);
-	}
-	catch (std::bad_alloc &ba)
-	{
-		throw ba;
-	}
 	try
 	{
 		m_p_SDCL = dynamic_cast<std::list<SOLADEVICECOORDS>*>(new std::list<SOLADEVICECOORDS>);
@@ -69,10 +60,12 @@ CSola_Auto_ID_DLL::CSola_Auto_ID_DLL(
 	m_sdcfp = NULL;
 	m_p_SDCL = NULL;
 	m_h_Work_Thread = NULL;
+	m_dw_Work_Thread_ID = 0UL;
 	m_hdup_Work_Thread = NULL;
 	m_pwstr_IP = NULL;
 	m_pstr_IP = NULL;
-	m_pList_Addr_Solas = NULL;
+	m_p_to_owner = NULL;
+	m_st_ip_len = 0;
 	m_int_Port = (0 == m_int_Port) ? STD_MODBUS_TCP_PORT : m_int_Port;
 /*	hres_r = StringCchLength(ip,MAX_IP_LENGTH,&m_st_ip_len);*/
 	try
@@ -90,14 +83,6 @@ CSola_Auto_ID_DLL::CSola_Auto_ID_DLL(
 	catch (std::exception &exc)
 	{
 		throw exc;
-	}
-	try
-	{
-		m_pList_Addr_Solas = dynamic_cast<std::list<uint8_t>*>(new std::list<uint8_t>);
-	}
-	catch (std::bad_alloc &ba)
-	{
-		throw ba;
 	}
 	try
 	{
@@ -127,10 +112,12 @@ CSola_Auto_ID_DLL::~CSola_Auto_ID_DLL()
 	if (NULL != m_hdup_Work_Thread)
 	{
 		b_r = CloseHandle(m_hdup_Work_Thread);
+		m_hdup_Work_Thread = NULL;
 	}
 	if (NULL != m_h_Work_Thread)
 	{
 		b_r = CloseHandle(m_h_Work_Thread);
+		m_h_Work_Thread = NULL;
 	}
 	if (m_pstr_IP != NULL)
 	{
@@ -141,11 +128,6 @@ CSola_Auto_ID_DLL::~CSola_Auto_ID_DLL()
 	{
 		delete m_pwstr_IP;
 		m_pwstr_IP = NULL;
-	}
-	if (m_pList_Addr_Solas != NULL)
-	{
-		delete m_pList_Addr_Solas;
-		m_pList_Addr_Solas = NULL;
 	}
 	if (m_p_SDCL != NULL)
 	{
@@ -160,6 +142,7 @@ CSola_Auto_ID_DLL::~CSola_Auto_ID_DLL()
 	if (NULL != m_h_Cancel_Event)
 	{
 		b_r = CloseHandle(m_h_Cancel_Event);
+		m_h_Cancel_Event = NULL;
 	}
 }
 
@@ -278,14 +261,6 @@ DWORD WINAPI CSola_Auto_ID_DLL::Work_Thread(LPARAM l_p)
 						PRODUCT_TYPE_REGISTER_ADDR,
 						1,
 						tab_rp_registers);
-					if ((NULL != p_this->Get_Addr_List()) && (1 == i_r))
-					{
-						if ((ui16_Residential_Sola_Type_Code == tab_rp_registers[0]) ||
-							(ui16_Commercial_Sola_Type_Code == tab_rp_registers[0]))
-						{
-							p_this->Get_Addr_List()->push_back(ui8_addr); /* Found a Sola at ui8_addr */
-						}
-					}
 					if ((NULL != p_this->Get_SDC_List()) && (1 == i_r))
 					{
 						if ((ui16_Residential_Sola_Type_Code == tab_rp_registers[0]) ||
@@ -360,14 +335,6 @@ DWORD WINAPI CSola_Auto_ID_DLL::Work_Thread(LPARAM l_p)
 						PRODUCT_TYPE_REGISTER_ADDR,
 						1,
 						tab_rp_registers);
-					if ((NULL != p_this->Get_Addr_List()) && (1 == i_r))
-					{
-						if ((ui16_Residential_Sola_Type_Code == tab_rp_registers[0]) ||
-							(ui16_Commercial_Sola_Type_Code == tab_rp_registers[0]))
-						{
-							p_this->Get_Addr_List()->push_back(ui8_addr); /* Found a Sola at ui8_addr */
-						}
-					}
 					if ((NULL != p_this->Get_SDC_List()) && (1 == i_r))
 					{
 						if ((ui16_Residential_Sola_Type_Code == tab_rp_registers[0]) ||
@@ -419,6 +386,11 @@ Ctrash81_Modeless_Dlg_DLL::Ctrash81_Modeless_Dlg_DLL()
 	this->m_p_lipddn = NULL;
 	m_p_sid = NULL;
 	m_i_Port = STD_MODBUS_TCP_PORT;
+	m_ct = CSola_Auto_ID_DLL::conn_type::RTU;
+	m_hw_caller = NULL;
+	m_p_Dlg_Item_Tmpl = NULL;
+	m_p_Dlg_Tmpl = NULL;
+	m_pf_scan_done_handler = NULL;
 }
 
 Ctrash81_Modeless_Dlg_DLL::Ctrash81_Modeless_Dlg_DLL(HWND hOwner,HINSTANCE hInst,TCHAR* szTitle) : m_hwndOwner(hOwner),
@@ -439,6 +411,11 @@ Ctrash81_Modeless_Dlg_DLL::Ctrash81_Modeless_Dlg_DLL(HWND hOwner,HINSTANCE hInst
 	this->m_p_lipddn = NULL;
 	m_p_sid = NULL;
 	m_i_Port = STD_MODBUS_TCP_PORT;
+	m_ct = CSola_Auto_ID_DLL::conn_type::RTU;
+	m_hw_caller = NULL;
+	m_p_Dlg_Item_Tmpl = NULL;
+	m_p_Dlg_Tmpl = NULL;
+	m_pf_scan_done_handler = NULL;
 }
 
 Ctrash81_Modeless_Dlg_DLL::~Ctrash81_Modeless_Dlg_DLL()
