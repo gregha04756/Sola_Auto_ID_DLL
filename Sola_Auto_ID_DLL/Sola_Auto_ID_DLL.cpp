@@ -367,6 +367,16 @@ DWORD WINAPI CSola_Auto_ID_DLL::Work_Thread(LPARAM l_p)
 	return dw_rc;
 }
 
+void* CSola_Auto_ID_DLL::deleteSDCListPtr(void)
+{
+	if (!(NULL == m_p_SDCL))
+	{
+		delete m_p_SDCL;
+		m_p_SDCL = NULL;
+	}
+	return (void*)m_p_SDCL;
+}
+
 Ctrash81_Modeless_Dlg_DLL::Ctrash81_Modeless_Dlg_DLL()
 {
 	this->m_szDlgQuitEvent = NULL;

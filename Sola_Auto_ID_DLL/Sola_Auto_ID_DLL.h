@@ -69,6 +69,7 @@ public:
 	void Set_Scan_Upd_Callback_Func_Ptr(void *p);
 	void Set_Scan_Done_Callback_Func_Ptr(void *p);
 	void Set_Pointer_To_Owner(void *p);
+	void* deleteSDCListPtr(void);
 	// TODO: add your methods here.
 private:
 	size_t m_st_ip_len;
