@@ -687,6 +687,11 @@ INT_PTR CALLBACK Ctrash81_Modeless_Dlg_DLL::DlgProc(HWND hDlg,UINT message,WPARA
 			p_v = SecureZeroMemory((PVOID)sz_mb_addr,sizeof(sz_mb_addr));
 			i_r = GetWindowText(hwnd_mbhi,sz_mb_addr,sizeof(sz_mb_addr)/sizeof(TCHAR));
 			ui8_mbhi = (uint8_t)std::stoi(wstring(sz_mb_addr));
+			if (!(NULL == pnd->m_p_sid))
+			{
+				delete pnd->m_p_sid;
+				pnd->m_p_sid = NULL;
+			}
 			try
 			{
 				if (CSola_Auto_ID_DLL::RTU == pnd->m_ct)
