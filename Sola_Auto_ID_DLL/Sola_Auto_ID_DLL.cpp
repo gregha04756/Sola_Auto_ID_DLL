@@ -67,7 +67,6 @@ CSola_Auto_ID_DLL::CSola_Auto_ID_DLL(
 	m_p_to_owner = NULL;
 	m_st_ip_len = 0;
 	m_int_Port = (0 == m_int_Port) ? STD_MODBUS_TCP_PORT : m_int_Port;
-/*	hres_r = StringCchLength(ip,MAX_IP_LENGTH,&m_st_ip_len);*/
 	try
 	{
 		m_p_lipddn = dynamic_cast<std::list<wstring>*>(new std::list<wstring>);
@@ -832,7 +831,6 @@ HGLOBAL Ctrash81_Modeless_Dlg_DLL::Make_Dlg_Template(LPSTR lpszMessage)
     *lpw++ = 0x0080;        // Button class atom
 
     lpwsz = (LPWSTR)lpw;
-/*    nchar = 1 + MultiByteToWideChar(CP_ACP,0,"Help",-1,lpwsz,50);*/
     nchar = 1 + MultiByteToWideChar(CP_ACP,0,"Scan",-1,lpwsz,50);
     lpw += nchar;
     *lpw++ = 0;             // No creation data
